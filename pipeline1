@@ -5,19 +5,19 @@ pipeline {
     stages {
        stage("Clone") {
            steps {
-            sh 'cd /var/jenkins_home/ && git clone -b $ghprbSourceBranch https://github.com/oleg-gavrysh/jenkinscripts'
+            sh 'cd /home/jenkins/ && git clone -b $ghprbSourceBranch https://github.com/oleg-gavrysh/jenkinscripts'
            }
        }
 
        stage("Build") {
            steps {
-           sh "bash /var/jenkins_home/jenkinscripts/build.sh "
+           sh "bash /home/jenkins/jenkinscripts/build.sh "
            }
        }
       
        stage("Test") {
            steps {
-            sh "bash /var/jenkins_home/jenkinscripts/test.sh >test_result.txt"
+            sh "bash /home/jenkins/jenkinscripts/test.sh >test_result.txt"
            }
        }
     }    
