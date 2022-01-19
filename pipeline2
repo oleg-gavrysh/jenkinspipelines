@@ -1,1 +1,22 @@
-
+node("docker-slave-jnlp") { 
+       stage("Clone") {
+            git credentialsId: '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', url: 'https://github.com/oleg-gavrysh/jenkinscripts.git'
+       }    
+       stage("Build") {
+           sh "bash ./build.sh "
+       }
+       try {
+          stage("Test") {
+               sh "bash ./test.sh >test_result.txt"
+               currentBuild.result="SUCCESS"
+          }   
+       } catch(er) {
+            archiveArtifacts artifacts: "test_result.txt"
+            currentBuild.result="FAILURE"
+         }  
+       finally {
+             echo "${currentBuild.result}"
+             writeFile file: "artifact.txt", text: "${currentBuild.result}"
+             archiveArtifacts artifacts: "artifact.txt"
+       }
+}
