@@ -1,1 +1,33 @@
+pipeline {
+        
+    agent {label "slave-ssh"}
+        
+    stages {
+       stage("Clone") {
+           steps {
+            sh 'cd /home/jenkins/ && git clone -b $ghprbSourceBranch https://github.com/oleg-gavrysh/jenkinsscripts'
+           }
+       }
 
+       stage("Build") {
+           steps {
+           sh "bash /home/jenkins/jenkinscripts/build.sh "
+           }
+       }
+      
+       stage("Test") {
+           steps {
+            sh "bash /home/jenkins/jenkinscripts/test.sh >test_result.txt"
+           }
+       }
+    }    
+    post {
+       always {
+           writeFile file: "artifact.txt", text: "${currentBuild.result}"
+           archiveArtifacts artifacts: "artifact.txt"
+       }
+       failure {
+           archiveArtifacts artifacts: "test_result.txt"
+       }
+    }
+}
