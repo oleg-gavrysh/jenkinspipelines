@@ -1,6 +1,6 @@
 pipeline {
         
-    agent {label "slave-ssh"}
+    agent {label "docker-slave-ssh"}
         
     stages {
        stage("Clone") {
