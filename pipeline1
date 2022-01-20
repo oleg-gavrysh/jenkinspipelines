@@ -11,13 +11,13 @@ pipeline {
 
        stage("Build") {
            steps {
-           sh "bash /home/jenkins/jenkinscripts/build.sh "
+           sh "bash /home/jenkins/jenkinsscripts/build.sh "
            }
        }
       
        stage("Test") {
            steps {
-            sh "bash /home/jenkins/jenkinscripts/test.sh >test_result.txt"
+            sh "bash /home/jenkins/jenkinsscripts/test.sh >test_result.txt"
            }
        }
     }    
