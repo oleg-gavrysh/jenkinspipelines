@@ -1,6 +1,6 @@
 node("docker-slave-jnlp") { 
        stage("Clone") {
-            git credentialsId: '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', url: 'https://github.com/oleg-gavrysh/jenkinscripts.git'
+            git branch: 'Master', credentialsId: 'github-ssh-key', url: 'https://github.com/oleg-gavrysh/jenkinsscripts'
        }    
        stage("Build") {
            sh "bash ./build.sh "
