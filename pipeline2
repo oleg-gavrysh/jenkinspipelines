@@ -3,7 +3,7 @@ node("docker-slave-jnlp") {
             git credentialsId: 'github-ssh-key', url: 'https://github.com/oleg-gavrysh/jenkinsscripts'
        }    
        stage("Build") {
-            sh "bash /home/jenkins/workspace/build.sh "
+            sh "bash ./build.sh "
        }
        try {
           stage("Test") {
