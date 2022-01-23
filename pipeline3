@@ -1,5 +1,5 @@
 pipeline { 
-    agent {label 'docker-slave-jnlp'}   
+    agent {label 'docker-slave-ssh'}   
     tools {maven 'M3'}
         
     stages {
