@@ -1,6 +1,6 @@
 pipeline { 
     agent {label 'docker-slave-ssh'}   
-    tools {maven 'Maven 3.6.3'}
+    tools {def mvnHome = tool 'M3'}
         
     stages {
        stage("Clone") {
